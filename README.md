@@ -37,12 +37,15 @@ This feature analyzes a user's GitHub contributions based on their username and 
 
 *   Upon submission, a loading spinner and a progress bar are displayed. The progress bar must reflect the actual job status, polled every 2 seconds.
 *   The number of commits is streamed in real-time during the analysis.
+*   **Result Consistency:** The analysis results must be displayed identically whether data is served from cache or generated fresh. No visual or functional differences should exist between cached and fresh results.
+*   **Button Behavior:** The "Analyze GitHub" button must behave consistently regardless of how many times it is pressed or whether results are cached. Multiple clicks should not create duplicate jobs or inconsistent UI states.
 *   The final results include:
     *   **Data Freshness:** A timestamp indicating when the data was last updated.
     *   **Coding Activity:** Key metrics like commit volume, lines of code added/deleted, and pull requests.
     *   **Collaboration:** A summary of repositories contributed to, issues opened, and languages used.
     *   **Profile Information:** The user's GitHub avatar, username, and bio.
 *   All UI elements must maintain a consistent layout, even if the corresponding data is zero or null.
+*   **State Management:** Internal application state must be synchronized with the UI display to ensure report generation availability is consistent for both cached and fresh results.
 
 ### 3.2. AI Report Generation
 
@@ -87,6 +90,7 @@ While GitHub is the primary data source, Revu also supports manual data entry fo
 *   Identical form submissions (i.e., same username, org, and date range) must return cached results instantly.
 *   Cached results bypass the need for new API calls and backend jobs.
 *   The cache is invalidated if any input parameters change.
+*   **Cache Transparency:** Users must not be able to distinguish between cached and fresh results in terms of UI presentation, functionality, or downstream features like report generation. Both should enable identical user workflows.
 
 ### 5.2. Error Handling
 
